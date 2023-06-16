@@ -9,11 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:pokefun/main.dart';
+import 'package:pokefun/pokefun_app.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const PokefunApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
