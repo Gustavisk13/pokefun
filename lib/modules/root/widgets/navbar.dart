@@ -20,7 +20,7 @@ class Navbar extends StatefulWidget {
   final double height;
   final double? elevation;
 
-  Navbar({
+  const Navbar({
     super.key,
     required this.items,
     required this.currentIndex,

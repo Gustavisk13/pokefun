@@ -1,5 +1,5 @@
 name: pokefun
-description: A new Flutter project.
+description: A really fun and immersive experience.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -43,7 +43,7 @@ dependencies:
   flutter_svg: ^1.1.6
   shimmer: ^3.0.0
   hive: ^2.2.3
-  floating_bottom_navigation_bar: ^1.5.2
+  dio: ^5.2.1+1
 
 flutter_icons:
   image_path: "lib/assets/icons/pokefun_logo.png"

@@ -15,7 +15,7 @@ class LabelAppBar extends AppBar {
   final void Function()? onBackPressed;
   LabelAppBar({
     super.key,
-    this.showBackButton = true,
+    this.showBackButton = false,
     this.valueActions,
     this.valueTitle,
     this.hasBackgroud = true,
@@ -23,7 +23,7 @@ class LabelAppBar extends AppBar {
     required BuildContext context,
     bool centerTitle = true,
   }) : super(
-          title: hasBackgroud ? Text(valueTitle ?? 'POKÉFUN', style: headlineBold) : null,
+          title: hasBackgroud ? Text(valueTitle ?? 'POKÉFUN', style: appbarTitle) : null,
           centerTitle: centerTitle,
           backgroundColor: hasBackgroud ? accentColor.withOpacity(0.90) : Colors.transparent,
           elevation: 0,
@@ -43,6 +43,11 @@ class LabelAppBar extends AppBar {
                     }
                   },
                 )
-              : FittedBox(fit: BoxFit.scaleDown, child: SvgPicture.asset(AppIcons.pokefunLogo)),
+              : Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SvgPicture.asset(
+                    AppIcons.pokefunLogo,
+                  ),
+                ),
         );
 }

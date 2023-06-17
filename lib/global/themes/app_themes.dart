@@ -162,3 +162,11 @@ const headlineBoldLarge = TextStyle(
   fontFamily: fontFamily,
   letterSpacing: 0.4,
 );
+
+const appbarTitle = TextStyle(
+  fontSize: 22,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+  fontFamily: fontFamily,
+  letterSpacing: 6,
+);

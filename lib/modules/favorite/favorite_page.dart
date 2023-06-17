@@ -11,7 +11,6 @@ class FavoritePage extends StatelessWidget {
     return Scaffold(
         appBar: LabelAppBar(
           context: context,
-          showBackButton: false,
           valueActions: [
             IconButton(
               icon: const Icon(Icons.search),
