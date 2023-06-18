@@ -12,6 +12,8 @@ class PokemonStatsModel {
     required this.stat,
   });
 
+  PokemonStatModel get current => stat;
+
   factory PokemonStatsModel.fromEntity(Stats stats) {
     return PokemonStatsModel(
       baseStat: stats.baseStat,

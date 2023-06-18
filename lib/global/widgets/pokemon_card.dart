@@ -2,13 +2,13 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pokefun/global/application/models/pokemon_model.dart';
 import 'package:pokefun/global/routes/app_routes.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
 import 'package:pokefun/global/widgets/favorite_button.dart';
+import 'package:pokefun/modules/pokemon/controller/pokemon_controller.dart';
+import 'package:provider/provider.dart';
 
 class PokemonCard extends StatelessWidget {
   final PokemonModel pokemon;
@@ -16,11 +16,14 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pokemonController = Provider.of<PokemonController>(context);
     return GestureDetector(
-      onTap: () => GoRouter.of(context).goNamed(
-        AppRoutes.pokemon,
-        extra: pokemon.id,
-      ),
+      onTap: () => {
+        pokemonController.fetchData(pokemon.id),
+        GoRouter.of(context).goNamed(
+          AppRoutes.pokemon,
+        ),
+      },
       child: Container(
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.all(8),

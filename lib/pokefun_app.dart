@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -19,6 +21,9 @@ class PokefunApp extends StatelessWidget {
       providers: Providers.providers,
       builder: (context, child) {
         final GoRouter router = context.watch<AppRouter>().router;
+        router.addListener(() {
+          Provider.of<AppRouter>(context, listen: false).setPokemonRoute(router.location);
+        });
 
         return MaterialApp.router(
           title: 'Pokéfun',

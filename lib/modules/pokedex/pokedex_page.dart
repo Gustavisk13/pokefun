@@ -46,7 +46,7 @@ class PokedexPage extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SizedBox(
           width: double.infinity,
           child: AnimatedBuilder(

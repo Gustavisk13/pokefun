@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pokefun/global/application/models/pokemon_detail_model.dart';
@@ -14,33 +16,43 @@ class AppRouter {
 
   GoRouter get router => _router;
 
+  String previousPokemonRoute = '';
+
+  setPokemonRoute(String route) {
+    if (route != AppRoutes.pokemonPath) {
+      previousPokemonRoute = route;
+    }
+  }
+
   late final GoRouter _router = GoRouter(
     initialLocation: AppRoutes.pokedexPath,
     navigatorKey: _rootNavigatorKey,
     routes: [
       GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
         name: AppRoutes.pokemon,
         path: AppRoutes.pokemonPath,
         pageBuilder: (context, state) {
-          int pokemonId = state.extra as int;
-          return NoTransitionPage(child: PokemonPage(pokemonId: pokemonId));
+          return const NoTransitionPage(child: PokemonPage());
         },
       ),
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
         pageBuilder: (context, state, child) {
-          return SlideInRoute(child: RootPage(child: child));
+          return NoTransitionPage(child: RootPage(child: child));
         },
         routes: [
           GoRoute(
+            parentNavigatorKey: _shellNavigatorKey,
             name: AppRoutes.pokedex,
             path: AppRoutes.pokedexPath,
-            pageBuilder: (context, state) => const NoTransitionPage(child: PokedexPage()),
+            pageBuilder: (context, state) => SlideInRoute(child: PokedexPage()),
           ),
           GoRoute(
+            parentNavigatorKey: _shellNavigatorKey,
             name: AppRoutes.favorites,
             path: AppRoutes.favoritesPath,
-            pageBuilder: (context, state) => const NoTransitionPage(child: FavoritePage()),
+            pageBuilder: (context, state) => SlideInRoute(child: FavoritePage()),
           ),
         ],
       ),

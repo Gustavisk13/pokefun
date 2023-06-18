@@ -157,7 +157,6 @@ const longTextAccent = TextStyle(
 
 const headlineBoldLarge = TextStyle(
   fontSize: 26,
-  color: Colors.white,
   fontWeight: FontWeight.bold,
   fontFamily: fontFamily,
   letterSpacing: 0.4,
