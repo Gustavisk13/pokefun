@@ -1,0 +1,4 @@
+enum PokemonAction {
+  ability,
+  move,
+}

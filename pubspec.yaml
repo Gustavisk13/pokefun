@@ -44,6 +44,7 @@ dependencies:
   shimmer: ^3.0.0
   hive: ^2.2.3
   dio: ^5.2.1+1
+  lottie: ^2.3.2
 
 flutter_icons:
   image_path: "lib/assets/icons/pokefun_logo.png"
@@ -86,6 +87,7 @@ flutter:
   assets:
     - lib/assets/images/
     - lib/assets/icons/
+    - lib/assets/animations/
 
   fonts:
     - family: Ruda

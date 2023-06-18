@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:pokefun/global/application/models/pokemon_model.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
 import 'package:pokefun/global/widgets/label_app_bar.dart';
+import 'package:pokefun/global/widgets/loading_indicator.dart';
 import 'package:pokefun/global/widgets/pokemon_card.dart';
 import 'package:pokefun/modules/pokedex/controller/pokedex_controller.dart';
 import 'package:provider/provider.dart';
@@ -50,6 +51,7 @@ class PokedexPage extends StatelessWidget {
                 children: [
                   Positioned.fill(
                     child: GridView.builder(
+                      key: const PageStorageKey('pokedex'),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         childAspectRatio: 0.7,
@@ -82,16 +84,7 @@ class PokedexPage extends StatelessWidget {
             bottom: 110,
             left: 0,
             right: 0,
-            child: CircleAvatar(
-              backgroundColor: primaryColor,
-              child: SizedBox(
-                height: 20,
-                width: 20,
-                child: CircularProgressIndicator(
-                  color: accentColor,
-                ),
-              ),
-            ),
+            child: LoadingIndicator(),
           );
         }
         return const Positioned.fill(

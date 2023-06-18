@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
-import 'package:pokefun/global/widgets/app_icons.dart';
+import 'package:pokefun/global/themes/app_icons.dart';
 
 class LabelAppBar extends AppBar {
   final bool showBackButton;

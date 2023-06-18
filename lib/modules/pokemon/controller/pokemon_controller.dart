@@ -14,6 +14,7 @@ class PokemonController extends ChangeNotifier {
   ScrollController get scrollController => _scrollController;
   bool get isLoading => _isLoading;
   PokemonDetailModel get pokemon => _pokemon;
+  bool get isFirstPokemon => _pokemon.id == 1;
 
   setIsLoading(bool value) {
     _isLoading = value;
@@ -24,7 +25,6 @@ class PokemonController extends ChangeNotifier {
     setIsLoading(true);
     _pokemon = await _datasource.getPokemon(id);
     setIsLoading(false);
-    log('pokemonController.pokemon: ${jsonEncode(pokemon)}');
 
     notifyListeners();
   }
