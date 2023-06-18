@@ -1,10 +1,8 @@
 import 'package:pokefun/global/domain/entity/abilities.dart';
-import 'package:pokefun/global/domain/entity/ability.dart';
 import 'package:pokefun/global/domain/entity/move.dart';
 import 'package:pokefun/global/domain/entity/pokemon.dart';
 import 'package:pokefun/global/domain/entity/stats.dart';
 import 'package:pokefun/global/domain/entity/types.dart';
-import 'package:pokefun/global/enums/pokemon_type.dart';
 
 class PokemonDetail extends Pokemon {
   final int height;

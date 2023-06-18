@@ -48,6 +48,7 @@ class _RootPageState extends State<RootPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: GestureDetector(
           onHorizontalDragEnd: (details) {
             // // log("drag end ${details.velocity.pixelsPerSecond.dx}");
@@ -64,15 +65,16 @@ class _RootPageState extends State<RootPage> {
             children: [
               widget.child,
               Navbar(
-                width: 240,
+                height: 80,
+                width: 210,
                 selectedItemColor: accentColor,
                 unselectedItemColor: accentColor,
                 selectedBackgroundColor: secondaryColor,
                 backgroundColor: primaryColor,
                 itemBorderRadius: 24,
                 margin: const EdgeInsets.all(24),
-                iconSize: 32,
-                fontSize: 16,
+                iconSize: 26,
+                fontSize: 12,
                 padding: const EdgeInsets.all(16),
                 borderRadius: 24,
                 currentIndex: currentIndex,

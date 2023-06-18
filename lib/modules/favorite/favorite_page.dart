@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:pokefun/global/widgets/animated_textfield.dart';
 import 'package:pokefun/global/widgets/label_app_bar.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -9,6 +10,7 @@ class FavoritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: LabelAppBar(
           context: context,
           valueActions: [
@@ -18,8 +20,6 @@ class FavoritePage extends StatelessWidget {
             ),
           ],
         ),
-        body: Center(
-          child: Text('Favorite Page'),
-        ));
+        body: Center(child: Text('FavoritePage')));
   }
 }

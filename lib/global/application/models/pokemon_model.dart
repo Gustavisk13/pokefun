@@ -1,6 +1,4 @@
-import 'package:pokefun/global/application/models/pokemon_move_model.dart';
 import 'package:pokefun/global/domain/entity/pokemon.dart';
-import 'package:pokefun/global/enums/pokemon_type.dart';
 
 class PokemonModel {
   final int id;

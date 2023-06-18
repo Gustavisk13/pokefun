@@ -8,14 +8,16 @@ import 'package:pokefun/global/config/http/dio_client.dart';
 
 class PokeapiDatasource extends SearchDatasource {
   final DioClient dioClient = DioClient(baseUrl: 'https://pokeapi.co/api/v2/');
+  final int limit = 5;
 
   @override
-  Future<List<PokemonModel>> getPokemons() async {
+  Future<List<PokemonModel>> getPokemons({int? page, bool? isFirst}) async {
     late Response response;
     List<PokemonModel> pokemons = [];
 
     try {
-      response = await dioClient.get('pokemon?limit=151');
+      response = await dioClient
+          .get('pokemon?limit=${(isFirst ?? false) ? 21 : limit}&offset=${(page ?? 0) * limit + ((isFirst ?? false) ? 0 : 21)}');
 
       final pokemonList = response.data['results'] as List;
 

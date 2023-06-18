@@ -1,9 +1,7 @@
 import 'package:pokefun/global/application/models/ability/pokemon_abilities_model.dart';
-import 'package:pokefun/global/application/models/ability/pokemon_ability_model.dart';
 import 'package:pokefun/global/application/models/stat/pokemon_stats_model.dart';
 import 'package:pokefun/global/application/models/type/pokemon_types_model.dart';
 import 'package:pokefun/global/domain/entity/pokemon_detail.dart';
-import 'package:pokefun/global/enums/pokemon_type.dart';
 
 import 'pokemon_move_model.dart';
 
