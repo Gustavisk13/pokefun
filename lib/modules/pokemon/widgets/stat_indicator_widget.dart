@@ -3,7 +3,7 @@ import 'package:pokefun/global/themes/app_themes.dart';
 
 class StatIndicatorWidget extends StatelessWidget {
   final String stat;
-  final int value;
+  final num value;
 
   const StatIndicatorWidget({
     super.key,
@@ -30,7 +30,7 @@ class StatIndicatorWidget extends StatelessWidget {
                   color: Colors.white,
                   size: 20,
                 ),
-                const SizedBox(width: 6),
+                const SizedBox(width: 2),
                 Text(
                   '$value',
                   style: bodyBold.copyWith(color: Colors.white),
@@ -40,13 +40,24 @@ class StatIndicatorWidget extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            stat.toUpperCase().replaceAll('-', ' '),
+            '${stat.toUpperCase().replaceAll('-', ' ')} ${_getMeasure(stat: stat)}',
             style: bodyBold /* .copyWith(fontSize: 12) */,
             textAlign: TextAlign.center,
           ),
         ],
       ),
     );
+  }
+
+  String _getMeasure({required String stat}) {
+    switch (stat) {
+      case 'height':
+        return '(m)';
+      case 'weight':
+        return '(kg)';
+      default:
+        return '';
+    }
   }
 
   IconData _getIcon({required String stat}) {

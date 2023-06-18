@@ -168,8 +168,8 @@ class PokemonPage extends StatelessWidget {
             children: [
               StatIndicatorWidget(stat: 'hp', value: pokemon.hp),
               StatIndicatorWidget(stat: 'speed', value: pokemon.speed),
-              StatIndicatorWidget(stat: 'height', value: pokemon.height),
-              StatIndicatorWidget(stat: 'weight', value: pokemon.weight),
+              StatIndicatorWidget(stat: 'height', value: pokemon.height / 10),
+              StatIndicatorWidget(stat: 'weight', value: pokemon.weight / 10),
             ],
           ),
         ),
