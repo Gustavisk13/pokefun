@@ -1,38 +1,44 @@
 import 'package:pokefun/global/domain/entity/type.dart';
 
 class PokemonTypeModel {
-  String name;
-  String url;
+  final int slot;
+  final String type;
+  final String url;
 
   PokemonTypeModel({
-    required this.name,
+    required this.slot,
+    required this.type,
     required this.url,
   });
 
   factory PokemonTypeModel.fromEntity(PokemonType e) {
     return PokemonTypeModel(
-      name: e.name,
+      slot: e.slot,
+      type: e.type,
       url: e.url,
     );
   }
 
   PokemonType toEntity() {
     return PokemonType(
-      name: name,
+      slot: slot,
+      type: type,
       url: url,
     );
   }
 
   factory PokemonTypeModel.fromJson(Map<String, dynamic> json) {
     return PokemonTypeModel(
-      name: json['name'],
-      url: json['url'],
+      slot: json['slot'],
+      type: json['type']['name'],
+      url: json['type']['url'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
+      'slot': slot,
+      'type': type,
       'url': url,
     };
   }

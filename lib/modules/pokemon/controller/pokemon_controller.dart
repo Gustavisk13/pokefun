@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:pokefun/global/application/models/pokemon_detail_model.dart';
 import 'package:pokefun/global/data/pokeapi/pokeapi_datasource.dart';
@@ -21,6 +24,8 @@ class PokemonController extends ChangeNotifier {
     setIsLoading(true);
     _pokemon = await _datasource.getPokemon(id);
     setIsLoading(false);
+    log('pokemonController.pokemon: ${jsonEncode(pokemon)}');
+
     notifyListeners();
   }
 }

@@ -1,6 +1,5 @@
-import 'package:pokefun/global/application/models/ability/pokemon_abilities_model.dart';
-import 'package:pokefun/global/application/models/stat/pokemon_stats_model.dart';
-import 'package:pokefun/global/application/models/type/pokemon_types_model.dart';
+import 'package:pokefun/global/application/models/pokemon_ability_model.dart';
+import 'package:pokefun/global/application/models/pokemon_type_model.dart';
 import 'package:pokefun/global/domain/entity/pokemon_detail.dart';
 
 import 'pokemon_move_model.dart';
@@ -11,9 +10,14 @@ class PokemonDetailModel {
   final String imageUrl;
   final int height;
   final int weight;
-  final List<PokemonStatsModel> stats;
-  final List<PokemonTypesModel> types;
-  final List<PokemonAbilitiesModel> abilities;
+  final int hp;
+  final int attack;
+  final int defense;
+  final int specialAttack;
+  final int specialDefense;
+  final int speed;
+  final List<PokemonTypeModel> types;
+  final List<PokemonAbilityModel> abilities;
   final List<PokemonMoveModel> moves;
 
   PokemonDetailModel({
@@ -22,7 +26,12 @@ class PokemonDetailModel {
     required this.imageUrl,
     required this.height,
     required this.weight,
-    required this.stats,
+    required this.hp,
+    required this.attack,
+    required this.defense,
+    required this.specialAttack,
+    required this.specialDefense,
+    required this.speed,
     required this.types,
     required this.abilities,
     required this.moves,
@@ -35,9 +44,14 @@ class PokemonDetailModel {
       imageUrl: e.imageUrl,
       height: e.height,
       weight: e.weight,
-      stats: e.stats.map((e) => PokemonStatsModel.fromEntity(e)).toList(),
-      types: e.types.map((e) => PokemonTypesModel.fromEntity(e)).toList(),
-      abilities: e.abilities.map((e) => PokemonAbilitiesModel.fromEntity(e)).toList(),
+      hp: e.hp,
+      attack: e.attack,
+      defense: e.defense,
+      specialAttack: e.specialAttack,
+      specialDefense: e.specialDefense,
+      speed: e.speed,
+      types: e.types.map((e) => PokemonTypeModel.fromEntity(e)).toList(),
+      abilities: e.abilities.map((e) => PokemonAbilityModel.fromEntity(e)).toList(),
       moves: e.moves.map((e) => PokemonMoveModel.fromEntity(e)).toList(),
     );
   }
@@ -49,23 +63,65 @@ class PokemonDetailModel {
       imageUrl: imageUrl,
       height: height,
       weight: weight,
-      stats: stats.map((e) => e.toEntity()).toList(),
-      types: types.map((e) => e.toEntity()).toList(),
-      abilities: abilities.map((e) => e.toEntity()).toList(),
-      moves: moves.map((e) => e.toEntity()).toList(),
+      hp: hp,
+      attack: attack,
+      defense: defense,
+      specialAttack: specialAttack,
+      specialDefense: specialDefense,
+      speed: speed,
+      types: types.map((type) => type.toEntity()).toList(),
+      abilities: abilities.map((ability) => ability.toEntity()).toList(),
+      moves: moves.map((move) => move.toEntity()).toList(),
     );
   }
 
   factory PokemonDetailModel.fromJson(Map<String, dynamic> json) {
+    final stats = json['stats'] as List;
+
+    int hp = 0;
+    int attack = 0;
+    int defense = 0;
+    int specialAttack = 0;
+    int specialDefense = 0;
+    int speed = 0;
+
+    for (final stat in stats) {
+      switch (stat['stat']['name']) {
+        case 'hp':
+          hp = stat['base_stat'];
+          break;
+        case 'attack':
+          attack = stat['base_stat'];
+          break;
+        case 'defense':
+          defense = stat['base_stat'];
+          break;
+        case 'special-attack':
+          specialAttack = stat['base_stat'];
+          break;
+        case 'special-defense':
+          specialDefense = stat['base_stat'];
+          break;
+        case 'speed':
+          speed = stat['base_stat'];
+          break;
+      }
+    }
+
     return PokemonDetailModel(
       id: json['id'],
       name: json['name'],
       imageUrl: json['sprites']['other']['home']['front_default'],
       height: json['height'],
       weight: json['weight'],
-      stats: json['stats'].map<PokemonStatsModel>((e) => PokemonStatsModel.fromJson(e)).toList(),
-      types: json['types'].map<PokemonTypesModel>((e) => PokemonTypesModel.fromJson(e)).toList(),
-      abilities: json['abilities'].map<PokemonAbilitiesModel>((e) => PokemonAbilitiesModel.fromJson(e)).toList(),
+      hp: hp,
+      attack: attack,
+      defense: defense,
+      specialAttack: specialAttack,
+      specialDefense: specialDefense,
+      speed: speed,
+      types: json['types'].map<PokemonTypeModel>((e) => PokemonTypeModel.fromJson(e)).toList(),
+      abilities: json['abilities'].map<PokemonAbilityModel>((e) => PokemonAbilityModel.fromJson(e)).toList(),
       moves: json['moves'].map<PokemonMoveModel>((e) => PokemonMoveModel.fromJson(e)).toList(),
     );
   }
@@ -77,7 +133,12 @@ class PokemonDetailModel {
       'imageUrl': imageUrl,
       'height': height,
       'weight': weight,
-      'stats': stats.map((e) => e.toJson()).toList(),
+      'hp': hp,
+      'attack': attack,
+      'defense': defense,
+      'specialAttack': specialAttack,
+      'specialDefense': specialDefense,
+      'speed': speed,
       'types': types.map((e) => e.toJson()).toList(),
       'abilities': abilities.map((e) => e.toJson()).toList(),
       'moves': moves.map((e) => e.toJson()).toList(),

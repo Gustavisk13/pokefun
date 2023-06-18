@@ -1,13 +1,7 @@
-import 'dart:developer';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:pokefun/global/application/models/pokemon_model.dart';
-import 'package:pokefun/global/data/pokeapi/pokeapi_datasource.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
-import 'package:pokefun/global/widgets/animated_textfield.dart';
 import 'package:pokefun/global/widgets/label_app_bar.dart';
 import 'package:pokefun/global/widgets/pokemon_card.dart';
 import 'package:pokefun/modules/pokedex/controller/pokedex_controller.dart';

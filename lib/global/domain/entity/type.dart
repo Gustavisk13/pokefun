@@ -1,9 +1,11 @@
 class PokemonType {
-  final String name;
+  final int slot;
+  final String type;
   final String url;
 
   PokemonType({
-    required this.name,
+    required this.slot,
+    required this.type,
     required this.url,
   });
 }

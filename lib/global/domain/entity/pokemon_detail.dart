@@ -1,15 +1,21 @@
-import 'package:pokefun/global/domain/entity/abilities.dart';
+import 'package:pokefun/global/domain/entity/ability.dart';
 import 'package:pokefun/global/domain/entity/move.dart';
 import 'package:pokefun/global/domain/entity/pokemon.dart';
-import 'package:pokefun/global/domain/entity/stats.dart';
-import 'package:pokefun/global/domain/entity/types.dart';
+import 'package:pokefun/global/domain/entity/type.dart';
+
+typedef Type = PokemonType;
 
 class PokemonDetail extends Pokemon {
   final int height;
   final int weight;
-  final List<Stats> stats;
-  final List<Types> types;
-  final List<Abilities> abilities;
+  final int hp;
+  final int attack;
+  final int defense;
+  final int specialAttack;
+  final int specialDefense;
+  final int speed;
+  final List<Type> types;
+  final List<Ability> abilities;
   final List<Move> moves;
 
   PokemonDetail({
@@ -18,7 +24,12 @@ class PokemonDetail extends Pokemon {
     required String imageUrl,
     required this.height,
     required this.weight,
-    required this.stats,
+    required this.hp,
+    required this.attack,
+    required this.defense,
+    required this.specialAttack,
+    required this.specialDefense,
+    required this.speed,
     required this.types,
     required this.abilities,
     required this.moves,
