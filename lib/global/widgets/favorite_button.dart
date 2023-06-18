@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:pokefun/global/data/hive/hive_datasource.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
+import 'package:provider/provider.dart';
 
 class FavoriteButton extends StatefulWidget {
   final double iconSize;
