@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pokefun/global/application/models/pokemon_detail_model.dart';
 import 'package:pokefun/global/routes/app_routes.dart';
 import 'package:pokefun/global/routes/transitions/slide_in_route.dart';
 import 'package:pokefun/modules/favorite/favorite_page.dart';
 import 'package:pokefun/modules/pokedex/pokedex_page.dart';
+import 'package:pokefun/modules/pokemon/pokemon_page.dart';
 import 'package:pokefun/modules/root/root_page.dart';
 
 class AppRouter {
@@ -19,7 +21,10 @@ class AppRouter {
       GoRoute(
         name: AppRoutes.pokemon,
         path: AppRoutes.pokemonPath,
-        pageBuilder: (context, state) => NoTransitionPage(child: Container()),
+        pageBuilder: (context, state) {
+          int pokemonId = state.extra as int;
+          return NoTransitionPage(child: PokemonPage(pokemonId: pokemonId));
+        },
       ),
       ShellRoute(
         navigatorKey: _shellNavigatorKey,

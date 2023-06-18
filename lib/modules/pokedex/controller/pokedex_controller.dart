@@ -19,6 +19,12 @@ class PokedexController extends ChangeNotifier {
     _scrollController.addListener((infiniteScrolling));
   }
 
+  @override
+  dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   setIsLoading(bool value) {
     _isLoading = value;
     notifyListeners();

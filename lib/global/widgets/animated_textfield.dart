@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -22,9 +24,10 @@ class _AnimatedTextFieldState extends State<AnimatedTextField> {
   @override
   void initState() {
     _focusNode.value.addListener(() {
+      log('hasFocus: ${_focusNode.value.hasFocus}');
       if (_focusNode.value.hasFocus) {
         setState(() {
-          widget.width = 200;
+          widget.width = 140;
         });
       } else {
         setState(() {
@@ -42,52 +45,52 @@ class _AnimatedTextFieldState extends State<AnimatedTextField> {
       valueListenable: _focusNode,
       builder: (context, value, child) {
         return AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          width: widget.width,
-          // padding: const EdgeInsets.symmetric(horizontal: 8),
-          decoration: BoxDecoration(
-            color: value.hasFocus ? primaryColor : primaryColor,
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: value.hasFocus
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: widget.controller,
-                          focusNode: value,
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Search',
-                          ),
-                        ),
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+            width: widget.width,
+            // padding: const EdgeInsets.symmetric(horizontal: 8),
+            decoration: BoxDecoration(
+              color: value.hasFocus ? primaryColor : null,
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: widget.controller,
+                      focusNode: value,
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: value.hasFocus ? Colors.black : Colors.transparent,
                       ),
-                      GestureDetector(
-                        child: Icon(
-                          Icons.search,
-                          size: widget.iconSize,
-                        ),
-                        onTap: () => widget.onTap(),
-                      )
-                    ],
+                      decoration: InputDecoration(
+                        isDense: true,
+                        isCollapsed: value.hasFocus,
+                        contentPadding: EdgeInsets.zero,
+                        border: InputBorder.none,
+                        hintText: 'Search',
+                      ),
+                    ),
                   ),
-                )
-              : Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: GestureDetector(
+                  GestureDetector(
                     child: Icon(
                       Icons.search,
+                      color: value.hasFocus ? accentColor : Colors.white,
                       size: widget.iconSize,
                     ),
                     onTap: () {
-                      FocusScope.of(context).requestFocus(value);
+                      if (!value.hasFocus) {
+                        value.requestFocus();
+                      } else {
+                        widget.onTap();
+                      }
                     },
-                  ),
-                ),
-        );
+                  )
+                ],
+              ),
+            ));
       },
     );
   }

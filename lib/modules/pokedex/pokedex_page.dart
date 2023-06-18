@@ -7,7 +7,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:pokefun/global/application/models/pokemon_model.dart';
 import 'package:pokefun/global/data/pokeapi/pokeapi_datasource.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
+import 'package:pokefun/global/widgets/animated_textfield.dart';
 import 'package:pokefun/global/widgets/label_app_bar.dart';
+import 'package:pokefun/global/widgets/pokemon_card.dart';
 import 'package:pokefun/modules/pokedex/controller/pokedex_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +24,25 @@ class PokedexPage extends StatelessWidget {
       appBar: LabelAppBar(
         context: context,
         valueActions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: AnimatedTextField(
+          //     onTap: () {
+          //       log('onTap');
+          //     },
+          //     controller: TextEditingController(),
+          //   ),
+          // ),
+
+          PopupMenuButton(
+            itemBuilder: (context) {
+              return [
+                const PopupMenuItem(
+                  child: Text('App version 1.0.0'),
+                ),
+              ];
+            },
+          )
         ],
       ),
       body: Padding(
@@ -41,7 +58,7 @@ class PokedexPage extends StatelessWidget {
                     child: GridView.builder(
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
-                        childAspectRatio: 1,
+                        childAspectRatio: 0.7,
                       ),
                       controller: pokedexController.scrollController,
                       // physics: const BouncingScrollPhysics(),
@@ -49,24 +66,7 @@ class PokedexPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final PokemonModel pokemon = pokedexController.pokemons[index];
 
-                        return Container(
-                          margin: const EdgeInsets.all(8),
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                  child: CachedNetworkImage(
-                                imageUrl: pokemon.imageUrl,
-                              )),
-                              Text(pokemon.name[0].toUpperCase() + pokemon.name.substring(1)),
-                            ],
-                          ),
-                        );
+                        return PokemonCard(pokemon: pokemon);
                       },
                     ),
                   ),

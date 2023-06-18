@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:pokefun/global/widgets/animated_textfield.dart';
+import 'package:pokefun/global/widgets/favorite_button.dart';
 import 'package:pokefun/global/widgets/label_app_bar.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -14,12 +17,26 @@ class FavoritePage extends StatelessWidget {
         appBar: LabelAppBar(
           context: context,
           valueActions: [
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {},
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: AnimatedTextField(
+            //     onTap: () {
+            //       log('onTap');
+            //     },
+            //     controller: TextEditingController(),
+            //   ),
+            // ),
+            PopupMenuButton(
+              itemBuilder: (context) {
+                return [
+                  const PopupMenuItem(
+                    child: Text('App version 1.0.0'),
+                  ),
+                ];
+              },
+            )
           ],
         ),
-        body: Center(child: Text('FavoritePage')));
+        body: Center(child: FavoriteButton() /* Text('FavoritePage') */));
   }
 }
