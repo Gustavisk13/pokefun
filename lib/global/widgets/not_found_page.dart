@@ -11,8 +11,8 @@ class NotFoundPage extends StatelessWidget {
   const NotFoundPage({
     Key? key,
     required this.title,
+    required this.actionButton,
     this.buttonTitle = '',
-    this.actionButton = false,
     this.onTap,
   }) : super(key: key);
 
@@ -35,7 +35,7 @@ class NotFoundPage extends StatelessWidget {
         if (actionButton) ...[
           const SizedBox(height: 16),
           GestureDetector(
-            onTap: () => onTap,
+            onTap: () => onTap!(),
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(

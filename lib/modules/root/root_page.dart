@@ -26,7 +26,6 @@ class _RootPageState extends State<RootPage> {
 
   void onItemTapped({required int tabIndex}) {
     if (tabIndex != currentIndex) {
-      log("going to ${tabs[tabIndex].initialRoute}");
       context.go(tabs[tabIndex].initialRoute);
     }
   }
