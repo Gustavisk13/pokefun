@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
 import 'package:pokefun/modules/root/widgets/root_navigation_bar_item.dart';
@@ -95,7 +97,7 @@ class _FloatingNavbarState extends State<Navbar> {
         child: Container(
           width:
               widget.width.isFinite ? (widget.width / items.length - 8) : MediaQuery.of(context).size.width / items.length - 24,
-          padding: EdgeInsets.symmetric(horizontal: 4, vertical: item.title != null ? 4 : 8),
+          padding: EdgeInsets.symmetric(horizontal: 4, vertical: item.title.isNotEmpty ? 4 : 8),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -106,9 +108,9 @@ class _FloatingNavbarState extends State<Navbar> {
                 color: widget.currentIndex == items.indexOf(item) ? widget.selectedItemColor : widget.unselectedItemColor,
                 size: widget.iconSize,
               ),
-              if (item.title != null)
+              if (item.title.isNotEmpty)
                 Text(
-                  '${item.title}',
+                  item.title,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: widget.currentIndex == items.indexOf(item) ? widget.selectedItemColor : widget.unselectedItemColor,

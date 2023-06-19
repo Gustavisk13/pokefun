@@ -75,6 +75,7 @@ class FavoritePage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: GridView.builder(
+                      key: const PageStorageKey('favorites'),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         childAspectRatio: 0.7,

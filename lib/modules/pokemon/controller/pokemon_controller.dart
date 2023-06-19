@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pokefun/global/application/models/pokemon_detail_model.dart';
-import 'package:pokefun/global/application/repository/favorite_repository_impl.dart';
 import 'package:pokefun/global/application/repository/pokemon_repository_impl.dart';
-import 'package:pokefun/global/data/hive/hive_datasource.dart';
 import 'package:pokefun/global/data/pokeapi/pokeapi_datasource.dart';
 import 'package:pokefun/global/domain/usecase/get_pokemon_details.dart';
-import 'package:pokefun/global/domain/usecase/toggle_favorite.dart';
 
 class PokemonController extends ChangeNotifier {
   final ScrollController _scrollController = ScrollController();
@@ -14,12 +11,6 @@ class PokemonController extends ChangeNotifier {
   final GetPokemonDetailsImpl _getPokemonDetails = GetPokemonDetailsImpl(PokemonRepositoryImpl(
     pokemonDatasource: PokeapiDatasource(),
   ));
-
-  final ToggleFavoriteImpl _toggleFavorite = ToggleFavoriteImpl(
-    FavoriteRepositoryImpl(
-      favoriteDataSource: HiveDatasource(),
-    ),
-  );
 
   bool _isLoading = false;
 

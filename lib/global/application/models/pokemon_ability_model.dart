@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:pokefun/global/domain/entity/ability.dart';
 
 class PokemonAbilityModel {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pokefun/global/application/repository/favorite_repository_impl.dart';
 import 'package:pokefun/global/data/hive/hive_datasource.dart';
 import 'package:pokefun/global/domain/entity/pokemon.dart';
-import 'package:pokefun/global/domain/entity/pokemon_detail.dart';
 import 'package:pokefun/global/domain/usecase/get_all_favorites.dart';
 import 'package:pokefun/global/domain/usecase/is_favorite.dart';
 import 'package:pokefun/global/domain/usecase/toggle_favorite.dart';

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:pokefun/global/application/datasource/pokemon_datasource.dart';
 import 'package:pokefun/global/application/models/pokemon_detail_model.dart';
 import 'package:pokefun/global/application/models/pokemon_model.dart';

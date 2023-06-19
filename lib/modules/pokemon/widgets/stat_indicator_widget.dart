@@ -13,7 +13,8 @@ class StatIndicatorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 80),
       child: Column(
         children: [
           Container(
@@ -61,7 +62,6 @@ class StatIndicatorWidget extends StatelessWidget {
   }
 
   IconData _getIcon({required String stat}) {
-    //TODO: implement game icons
     switch (stat) {
       case 'hp':
         return Icons.favorite;

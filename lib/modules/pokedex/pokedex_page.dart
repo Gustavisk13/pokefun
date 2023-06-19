@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:pokefun/global/application/models/pokemon_model.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
 import 'package:pokefun/global/widgets/label_app_bar.dart';

@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +7,6 @@ import 'package:pokefun/global/enum/pokemon_types_enum.dart';
 import 'package:pokefun/global/routes/app_router.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
 import 'package:pokefun/global/utils/color_by_type.dart';
-import 'package:pokefun/global/utils/quick_border.dart';
 import 'package:pokefun/global/widgets/label_app_bar.dart';
 import 'package:pokefun/global/widgets/loading_indicator.dart';
 import 'package:pokefun/modules/favorite/controller/favorite_controller.dart';
@@ -187,11 +183,13 @@ class PokemonPage extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Flexible(
-          fit: FlexFit.loose,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
+        SizedBox(
+          width: double.infinity,
+          child: Wrap(
+            alignment: WrapAlignment.spaceEvenly,
+            runAlignment: WrapAlignment.spaceEvenly,
+            // crossAxisAlignment: CrossAxisAlignment.baseline,
+            // textBaseline: TextBaseline.alphabetic,
             children: [
               StatIndicatorWidget(stat: 'hp', value: pokemon.hp),
               StatIndicatorWidget(stat: 'speed', value: pokemon.speed),
@@ -200,12 +198,15 @@ class PokemonPage extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 8),
-        Flexible(
-          fit: FlexFit.loose,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
+        const SizedBox(height: 8),
+        SizedBox(
+          width: double.infinity,
+          child: Wrap(
+            alignment: WrapAlignment.spaceEvenly,
+            runAlignment: WrapAlignment.spaceEvenly,
+
+            // crossAxisAlignment: CrossAxisAlignment.baseline,
+            // textBaseline: TextBaseline.alphabetic,
             children: [
               StatIndicatorWidget(stat: 'attack', value: pokemon.attack),
               StatIndicatorWidget(stat: 'defense', value: pokemon.defense),

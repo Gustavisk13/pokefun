@@ -1,8 +1,6 @@
 import 'package:pokefun/global/application/datasource/favorite_datasource.dart';
-import 'package:pokefun/global/application/models/pokemon_detail_model.dart';
 import 'package:pokefun/global/application/models/pokemon_model.dart';
 import 'package:pokefun/global/domain/entity/pokemon.dart';
-import 'package:pokefun/global/domain/entity/pokemon_detail.dart';
 import 'package:pokefun/global/domain/repository/favorite_repository.dart';
 
 class FavoriteRepositoryImpl extends FavoriteRepository {

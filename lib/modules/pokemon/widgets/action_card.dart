@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:pokefun/global/application/models/pokemon_detail_model.dart';
 import 'package:pokefun/global/enum/pokemon_action_enum.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
 
@@ -30,10 +27,13 @@ class ActionCard extends StatelessWidget {
             color: accentColor,
           ),
           const SizedBox(width: 6),
-          Text(
-            title.toUpperCase().replaceAll('-', ' '),
-            style: bodyBold.copyWith(
-              color: accentColor,
+          Expanded(
+            child: Text(
+              title.toUpperCase().replaceAll('-', ' '),
+              overflow: TextOverflow.ellipsis,
+              style: bodyBold.copyWith(
+                color: accentColor,
+              ),
             ),
           )
         ],

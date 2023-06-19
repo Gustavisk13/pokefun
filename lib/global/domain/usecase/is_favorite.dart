@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:pokefun/global/domain/repository/favorite_repository.dart';
 
 abstract class IsFavorite {

@@ -7,8 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:pokefun/main.dart';
 import 'package:pokefun/pokefun_app.dart';
 
 void main() {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:pokefun/global/application/models/pokemon_detail_model.dart';
 import 'package:pokefun/pokefun_app.dart';
 
 void main() async {

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 
 class DioClient {
@@ -29,10 +27,5 @@ class ApiInterceptor extends Interceptor {
       return super.onResponse(response, handler);
     }
     super.onResponse(response, handler);
-  }
-
-  @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    super.onError(err, handler);
   }
 }

@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pokefun/global/application/models/pokemon_model.dart';
-import 'package:pokefun/global/application/repository/favorite_repository_impl.dart';
 import 'package:pokefun/global/application/repository/pokemon_repository_impl.dart';
-import 'package:pokefun/global/data/hive/hive_datasource.dart';
 import 'package:pokefun/global/data/pokeapi/pokeapi_datasource.dart';
 import 'package:pokefun/global/domain/entity/pokemon.dart';
-import 'package:pokefun/global/domain/repository/pokemon_repository.dart';
-import 'package:pokefun/global/domain/usecase/get_all_pokemons.dart';
 import 'package:pokefun/global/domain/usecase/get_all_pokemons_paginated.dart';
 
 class PokedexController extends ChangeNotifier {

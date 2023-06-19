@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -19,6 +20,10 @@ class PokemonCard extends StatelessWidget {
     final pokemonController = Provider.of<PokemonController>(context);
     final favoriteController = Provider.of<FavoriteController>(context);
     final isFavorite = favoriteController.isFavorite(pokemon.id);
+    final MediaQueryData mediaQuery = MediaQuery.of(context);
+
+    log('mediaQuery.size.width: ${mediaQuery.size.width}');
+
     return GestureDetector(
       onTap: () => {
         pokemonController.fetchData(pokemon.id),
@@ -43,7 +48,8 @@ class PokemonCard extends StatelessWidget {
             ),
             Text(
               pokemon.name[0].toUpperCase() + pokemon.name.substring(1),
-              style: headlineBold.copyWith(fontSize: 18),
+              overflow: TextOverflow.ellipsis,
+              style: headlineBold.copyWith(fontSize: mediaQuery.size.width > 385 ? 18 : 16),
             ),
             SizedBox(
               width: double.infinity,
@@ -73,14 +79,18 @@ class PokemonCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          size: 16,
+                          size: mediaQuery.size.width > 385 ? 16 : 10,
                           isFavorite ? Icons.favorite : Icons.favorite_border,
                           color: isFavorite ? primaryColor : accentColor,
                         ),
                         const SizedBox(width: 4),
                         Text(
                           'Favorite',
-                          style: bodyBold.copyWith(color: isFavorite ? primaryColor : accentColor, fontSize: 12),
+                          overflow: TextOverflow.ellipsis,
+                          style: bodyBold.copyWith(
+                            color: isFavorite ? primaryColor : accentColor,
+                            fontSize: mediaQuery.size.width > 385 ? 12 : 10,
+                          ),
                         ),
                       ],
                     ),

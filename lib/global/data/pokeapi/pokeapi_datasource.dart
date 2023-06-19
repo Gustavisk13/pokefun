@@ -1,10 +1,7 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:pokefun/global/application/datasource/pokemon_datasource.dart';
-import 'package:pokefun/global/application/models/pokemon_model.dart';
 import 'package:pokefun/global/application/models/pokemon_detail_model.dart';
+import 'package:pokefun/global/application/models/pokemon_model.dart';
 import 'package:pokefun/global/config/http/dio_client.dart';
 
 class PokeapiDatasource extends PokemonDatasource {
@@ -33,7 +30,6 @@ class PokeapiDatasource extends PokemonDatasource {
 
       return Future.value(pokemons);
     } catch (e) {
-      print(e);
       throw Exception();
     }
   }
@@ -61,7 +57,6 @@ class PokeapiDatasource extends PokemonDatasource {
 
       return Future.value(pokemons);
     } catch (e) {
-      print(e);
       throw Exception();
     }
   }
@@ -78,7 +73,6 @@ class PokeapiDatasource extends PokemonDatasource {
 
       return Future.value(pokemonDetail);
     } catch (e) {
-      print(e);
       throw Exception();
     }
   }

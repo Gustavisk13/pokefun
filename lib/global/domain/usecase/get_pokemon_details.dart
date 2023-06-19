@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:pokefun/global/domain/entity/pokemon.dart';
 import 'package:pokefun/global/domain/entity/pokemon_detail.dart';
 import 'package:pokefun/global/domain/repository/pokemon_repository.dart';
 
