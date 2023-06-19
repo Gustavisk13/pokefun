@@ -20,7 +20,7 @@ class PokemonRepositoryImpl extends PokemonRepository {
     try {
       pokemons = await pokemonDatasource.getPokemonsPaginated(offset: offset, limit: limit);
     } catch (e) {
-      throw PokemonSearchException(message: '$e');
+      throw GetPokemonsPaginatedException(message: '$e');
     }
 
     return pokemons.map((pokemon) => pokemon.toEntity()).toList();
@@ -33,7 +33,7 @@ class PokemonRepositoryImpl extends PokemonRepository {
     try {
       pokemons = await pokemonDatasource.getPokemons();
     } catch (e) {
-      throw PokemonSearchException(message: '$e');
+      throw GetAllPokemonsException(message: '$e');
     }
 
     return pokemons.map((pokemon) => pokemon.toEntity()).toList();
@@ -46,7 +46,7 @@ class PokemonRepositoryImpl extends PokemonRepository {
     try {
       pokemonDetail = await pokemonDatasource.getPokemon(id);
     } catch (e) {
-      throw PokemonSearchException(message: '$e');
+      throw GetPokemonDetailsException(message: '$e');
     }
 
     return pokemonDetail.toEntity();

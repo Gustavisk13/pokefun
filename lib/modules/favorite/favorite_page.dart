@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pokefun/global/application/models/pokemon_model.dart';
+import 'package:pokefun/global/routes/app_routes.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
 import 'package:pokefun/global/widgets/label_app_bar.dart';
+import 'package:pokefun/global/widgets/not_found_page.dart';
 import 'package:pokefun/global/widgets/pokemon_card.dart';
 import 'package:pokefun/modules/favorite/controller/favorite_controller.dart';
 import 'package:provider/provider.dart';
@@ -71,6 +74,19 @@ class FavoritePage extends StatelessWidget {
           child: AnimatedBuilder(
             animation: favoriteController,
             builder: (context, child) {
+              if (favoriteController.favorites.isEmpty) {
+                return Center(
+                  child: NotFoundPage(
+                    title: 'No favorite pokémon found',
+                    actionButton: true,
+                    buttonTitle: 'Explore Pokémons!',
+                    onTap: () {
+                      GoRouter.of(context).go(AppRoutes.pokedexPath);
+                    },
+                  ),
+                );
+              }
+
               return Column(
                 children: [
                   Expanded(

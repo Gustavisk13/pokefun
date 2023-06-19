@@ -34,16 +34,19 @@ class PokemonPage extends StatelessWidget {
             valueActions: [
               IconButton(
                 onPressed: () {
-                  favoriteController.toggleFavoritePokemon(pokemonController.pokemon);
+                  if (pokemonController.isLoading || pokemonController.pokemon == null) {
+                    return;
+                  }
+                  favoriteController.toggleFavoritePokemon(pokemonController.pokemon!);
                 },
-                icon: pokemonController.isLoading
+                icon: pokemonController.isLoading || pokemonController.pokemon == null
                     ? const Icon(
                         Icons.favorite_border,
                         color: primaryColor,
                       )
                     : Consumer<FavoriteController>(
                         builder: (context, value, child) {
-                          return value.isFavorite(pokemonController.pokemon.id)
+                          return value.isFavorite(pokemonController.pokemon!.id)
                               ? const Icon(
                                   Icons.favorite,
                                   color: primaryColor,
@@ -60,7 +63,7 @@ class PokemonPage extends StatelessWidget {
           backgroundColor: backgroundColor,
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: pokemonController.isLoading
+            child: pokemonController.isLoading || pokemonController.pokemon == null
                 ? const Center(
                     child: LoadingIndicator(),
                   )
@@ -70,11 +73,11 @@ class PokemonPage extends StatelessWidget {
                       children: [
                         _buildPokemonSection(pokemonController),
                         const SizedBox(height: 16),
-                        _buildStatsSection(pokemonController.pokemon),
+                        _buildStatsSection(pokemonController.pokemon!),
                         const SizedBox(height: 16),
-                        _buildAbilitiesSection(pokemonController.pokemon),
+                        _buildAbilitiesSection(pokemonController.pokemon!),
                         const SizedBox(height: 16),
-                        _buildMovesSection(pokemonController.pokemon),
+                        _buildMovesSection(pokemonController.pokemon!),
                       ],
                     ),
                   ),
@@ -83,7 +86,7 @@ class PokemonPage extends StatelessWidget {
   }
 
   Widget _buildPokemonSection(PokemonController pokemonController) {
-    final PokemonDetailModel pokemon = pokemonController.pokemon;
+    final PokemonDetailModel pokemon = pokemonController.pokemon!;
     return Column(
       children: [
         _buildPokemonImage(pokemonController),
@@ -109,7 +112,7 @@ class PokemonPage extends StatelessWidget {
   }
 
   Widget _buildPokemonImage(PokemonController pokemonController) {
-    final PokemonDetailModel pokemon = pokemonController.pokemon;
+    final PokemonDetailModel pokemon = pokemonController.pokemon!;
     return Row(
       children: [
         IconButton(

@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -21,8 +18,6 @@ class PokemonCard extends StatelessWidget {
     final favoriteController = Provider.of<FavoriteController>(context);
     final isFavorite = favoriteController.isFavorite(pokemon.id);
     final MediaQueryData mediaQuery = MediaQuery.of(context);
-
-    log('mediaQuery.size.width: ${mediaQuery.size.width}');
 
     return GestureDetector(
       onTap: () => {

@@ -4,6 +4,7 @@ import 'package:pokefun/global/application/repository/pokemon_repository_impl.da
 import 'package:pokefun/global/data/pokeapi/pokeapi_datasource.dart';
 import 'package:pokefun/global/domain/entity/pokemon.dart';
 import 'package:pokefun/global/domain/usecase/get_all_pokemons_paginated.dart';
+import 'package:pokefun/pokefun_app.dart';
 
 class PokedexController extends ChangeNotifier {
   final GetAllPokemonsPaginatedImpl _getAllPokemons = GetAllPokemonsPaginatedImpl(
@@ -55,7 +56,12 @@ class PokedexController extends ChangeNotifier {
         offset: _page == 0 ? 0 : _page * 5 + (_page == 0 ? 0 : 21),
       );
     } catch (e) {
-      throw Exception(e);
+      scaffoldMessengerKey.currentState?.showSnackBar(
+        SnackBar(
+          content: Text('$e'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
 
     for (Pokemon pokemon in pokemons) {

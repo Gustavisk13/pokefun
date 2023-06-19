@@ -3,6 +3,7 @@ import 'package:pokefun/global/application/datasource/pokemon_datasource.dart';
 import 'package:pokefun/global/application/models/pokemon_detail_model.dart';
 import 'package:pokefun/global/application/models/pokemon_model.dart';
 import 'package:pokefun/global/config/http/dio_client.dart';
+import 'package:pokefun/global/domain/errors/errors.dart';
 
 class PokeapiDatasource extends PokemonDatasource {
   final DioClient dioClient = DioClient(baseUrl: 'https://pokeapi.co/api/v2/');
@@ -15,6 +16,10 @@ class PokeapiDatasource extends PokemonDatasource {
     try {
       response = await dioClient.get('pokemon?limit=$limit&offset=$offset');
 
+      if (response.statusCode != 200) {
+        throw DatasourceException(message: 'Erro ao buscar pokemons', datasource: 'Pokeapi');
+      }
+
       final pokemonList = response.data['results'] as List;
 
       for (final pokemon in pokemonList) {
@@ -30,7 +35,7 @@ class PokeapiDatasource extends PokemonDatasource {
 
       return Future.value(pokemons);
     } catch (e) {
-      throw Exception();
+      throw DatasourceException(message: '$e', datasource: 'Pokeapi');
     }
   }
 
@@ -42,6 +47,10 @@ class PokeapiDatasource extends PokemonDatasource {
     try {
       response = await dioClient.get('pokemon');
 
+      if (response.statusCode != 200) {
+        throw DatasourceException(message: 'Erro ao buscar pokemons', datasource: 'Pokeapi');
+      }
+
       final pokemonList = response.data['results'] as List;
 
       for (final pokemon in pokemonList) {
@@ -57,7 +66,7 @@ class PokeapiDatasource extends PokemonDatasource {
 
       return Future.value(pokemons);
     } catch (e) {
-      throw Exception();
+      throw DatasourceException(message: '$e', datasource: 'Pokeapi');
     }
   }
 
@@ -69,11 +78,15 @@ class PokeapiDatasource extends PokemonDatasource {
     try {
       response = await dioClient.get('pokemon/$id');
 
+      if (response.statusCode != 200) {
+        throw DatasourceException(message: 'Erro ao buscar detalhes do pokemon', datasource: 'Pokeapi');
+      }
+
       pokemonDetail = PokemonDetailModel.fromJson(response.data);
 
       return Future.value(pokemonDetail);
     } catch (e) {
-      throw Exception();
+      throw DatasourceException(message: '$e', datasource: 'Pokeapi');
     }
   }
 }

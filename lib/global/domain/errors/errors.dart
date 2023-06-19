@@ -4,32 +4,45 @@ class PokemonNotFoundException implements Exception {
   PokemonNotFoundException({required this.message});
 }
 
-class ServerException implements Exception {
+class GetAllPokemonsException implements Exception {
   final String message;
 
-  ServerException({required this.message});
+  GetAllPokemonsException({required this.message});
 }
 
-class CacheException implements Exception {
+class GetPokemonsPaginatedException implements Exception {
   final String message;
 
-  CacheException({required this.message});
+  GetPokemonsPaginatedException({required this.message});
 }
 
-class PokemonSearchException implements Exception {
+class GetPokemonDetailsException implements Exception {
   final String message;
 
-  PokemonSearchException({required this.message});
+  GetPokemonDetailsException({required this.message});
 }
 
-class PokemonDetailException implements Exception {
+class GetAllFavoritesException implements Exception {
   final String message;
 
-  PokemonDetailException({required this.message});
+  GetAllFavoritesException({required this.message});
 }
 
-class PokemonFavoriteException implements Exception {
+class ToggleFavoriteException implements Exception {
   final String message;
 
-  PokemonFavoriteException({required this.message});
+  ToggleFavoriteException({required this.message});
+}
+
+class CheckFavoriteException implements Exception {
+  final String message;
+
+  CheckFavoriteException({required this.message});
+}
+
+class DatasourceException implements Exception {
+  final String message;
+  final String datasource;
+
+  DatasourceException({required this.message, required this.datasource});
 }

@@ -3,6 +3,7 @@ import 'package:pokefun/global/application/models/pokemon_model.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
 import 'package:pokefun/global/widgets/label_app_bar.dart';
 import 'package:pokefun/global/widgets/loading_indicator.dart';
+import 'package:pokefun/global/widgets/not_found_page.dart';
 import 'package:pokefun/global/widgets/pokemon_card.dart';
 import 'package:pokefun/modules/pokedex/controller/pokedex_controller.dart';
 import 'package:provider/provider.dart';
@@ -45,6 +46,17 @@ class PokedexPage extends StatelessWidget {
           child: AnimatedBuilder(
             animation: pokedexController,
             builder: (context, child) {
+              if (pokedexController.pokemons.isEmpty) {
+                return NotFoundPage(
+                  title: 'Pokédex vazia!',
+                  actionButton: true,
+                  buttonTitle: 'Recarregar',
+                  onTap: () {
+                    pokedexController.fetchData();
+                  },
+                );
+              }
+
               return Stack(
                 children: [
                   Positioned.fill(
