@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:pokefun/global/application/models/pokemon_model.dart';
+import 'package:pokefun/global/application/repository/favorite_repository_impl.dart';
+import 'package:pokefun/global/application/repository/pokemon_repository_impl.dart';
+import 'package:pokefun/global/data/hive/hive_datasource.dart';
 import 'package:pokefun/global/data/pokeapi/pokeapi_datasource.dart';
+import 'package:pokefun/global/domain/entity/pokemon.dart';
+import 'package:pokefun/global/domain/repository/pokemon_repository.dart';
+import 'package:pokefun/global/domain/usecase/get_all_pokemons.dart';
+import 'package:pokefun/global/domain/usecase/get_all_pokemons_paginated.dart';
 
 class PokedexController extends ChangeNotifier {
-  final PokeapiDatasource _datasource = PokeapiDatasource();
+  final GetAllPokemonsPaginatedImpl _getAllPokemons = GetAllPokemonsPaginatedImpl(
+    PokemonRepositoryImpl(
+      pokemonDatasource: PokeapiDatasource(),
+    ),
+  );
+
   final List<PokemonModel> _pokemons = [];
   late final ScrollController _scrollController;
   bool _isLoading = false;
@@ -14,7 +26,7 @@ class PokedexController extends ChangeNotifier {
   ScrollController get scrollController => _scrollController;
 
   PokedexController() {
-    fetchData(isFirst: true);
+    fetchData();
     _scrollController = ScrollController();
     _scrollController.addListener((infiniteScrolling));
   }
@@ -36,16 +48,27 @@ class PokedexController extends ChangeNotifier {
     }
   }
 
-  Future<List<PokemonModel>> fetchPokemons() async {
-    return await _datasource.getPokemons();
-  }
-
-  Future<void> fetchData({bool? isFirst}) async {
+  Future<void> fetchData() async {
     setIsLoading(true);
-    final results = await _datasource.getPokemons(page: _page, isFirst: isFirst);
+    List<Pokemon> pokemons = [];
+    List<PokemonModel> pokemonsModels = [];
+
+    try {
+      pokemons = await _getAllPokemons(
+        limit: _page == 0 ? 21 : 5,
+        offset: _page == 0 ? 0 : _page * 5 + (_page == 0 ? 0 : 21),
+      );
+    } catch (e) {
+      throw Exception(e);
+    }
+
+    for (Pokemon pokemon in pokemons) {
+      pokemonsModels.add(PokemonModel.fromEntity(pokemon));
+    }
+
     setIsLoading(false);
 
-    _pokemons.addAll(results);
+    _pokemons.addAll(pokemonsModels);
 
     _page++;
 

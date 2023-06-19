@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pokefun/global/application/models/pokemon_detail_model.dart';
 import 'package:pokefun/global/routes/app_routes.dart';
 import 'package:pokefun/global/routes/transitions/slide_in_route.dart';
 import 'package:pokefun/modules/favorite/favorite_page.dart';

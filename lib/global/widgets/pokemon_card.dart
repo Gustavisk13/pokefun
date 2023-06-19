@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pokefun/global/application/models/pokemon_model.dart';
 import 'package:pokefun/global/routes/app_routes.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
-import 'package:pokefun/global/widgets/favorite_button.dart';
+import 'package:pokefun/modules/favorite/controller/favorite_controller.dart';
 import 'package:pokefun/modules/pokemon/controller/pokemon_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +17,8 @@ class PokemonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pokemonController = Provider.of<PokemonController>(context);
+    final favoriteController = Provider.of<FavoriteController>(context);
+    final isFavorite = favoriteController.isFavorite(pokemon.id);
     return GestureDetector(
       onTap: () => {
         pokemonController.fetchData(pokemon.id),
@@ -51,8 +53,40 @@ class PokemonCard extends StatelessWidget {
                 style: bodyBold.copyWith(fontSize: 12, color: Colors.grey),
               ),
             ),
-            FavoriteButton(
-              iconSize: 12,
+            GestureDetector(
+              onTap: () => {
+                favoriteController.toggleFavoritePokemon(pokemon),
+              },
+              child: Consumer<FavoriteController>(
+                builder: (context, value, child) {
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 250),
+                    curve: Curves.easeInOut,
+                    padding: const EdgeInsets.all(6),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: isFavorite ? accentColor : primaryColor,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: accentColor),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          size: 16,
+                          isFavorite ? Icons.favorite : Icons.favorite_border,
+                          color: isFavorite ? primaryColor : accentColor,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          'Favorite',
+                          style: bodyBold.copyWith(color: isFavorite ? primaryColor : accentColor, fontSize: 12),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             )
           ],
         ),

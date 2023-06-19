@@ -1,13 +1,11 @@
 import 'package:pokefun/global/application/models/pokemon_ability_model.dart';
+import 'package:pokefun/global/application/models/pokemon_model.dart';
 import 'package:pokefun/global/application/models/pokemon_type_model.dart';
 import 'package:pokefun/global/domain/entity/pokemon_detail.dart';
 
 import 'pokemon_move_model.dart';
 
-class PokemonDetailModel {
-  final int id;
-  final String name;
-  final String imageUrl;
+class PokemonDetailModel extends PokemonModel {
   final int height;
   final int weight;
   final int hp;
@@ -21,9 +19,9 @@ class PokemonDetailModel {
   final List<PokemonMoveModel> moves;
 
   PokemonDetailModel({
-    required this.id,
-    required this.name,
-    required this.imageUrl,
+    required id,
+    required name,
+    required imageUrl,
     required this.height,
     required this.weight,
     required this.hp,
@@ -35,7 +33,11 @@ class PokemonDetailModel {
     required this.types,
     required this.abilities,
     required this.moves,
-  });
+  }) : super(
+          id: id,
+          name: name,
+          imageUrl: imageUrl,
+        );
 
   factory PokemonDetailModel.fromEntity(PokemonDetail e) {
     return PokemonDetailModel(
@@ -53,9 +55,10 @@ class PokemonDetailModel {
       types: e.types.map((e) => PokemonTypeModel.fromEntity(e)).toList(),
       abilities: e.abilities.map((e) => PokemonAbilityModel.fromEntity(e)).toList(),
       moves: e.moves.map((e) => PokemonMoveModel.fromEntity(e)).toList(),
-    );
+    )..isFavorite = e.isFavorite;
   }
 
+  @override
   PokemonDetail toEntity() {
     return PokemonDetail(
       id: id,
@@ -72,7 +75,7 @@ class PokemonDetailModel {
       types: types.map((type) => type.toEntity()).toList(),
       abilities: abilities.map((ability) => ability.toEntity()).toList(),
       moves: moves.map((move) => move.toEntity()).toList(),
-    );
+    )..isFavorite = isFavorite;
   }
 
   factory PokemonDetailModel.fromJson(Map<String, dynamic> json) {
@@ -123,9 +126,10 @@ class PokemonDetailModel {
       types: json['types'].map<PokemonTypeModel>((e) => PokemonTypeModel.fromJson(e)).toList(),
       abilities: json['abilities'].map<PokemonAbilityModel>((e) => PokemonAbilityModel.fromJson(e)).toList(),
       moves: json['moves'].map<PokemonMoveModel>((e) => PokemonMoveModel.fromJson(e)).toList(),
-    );
+    )..isFavorite = false;
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -142,6 +146,7 @@ class PokemonDetailModel {
       'types': types.map((e) => e.toJson()).toList(),
       'abilities': abilities.map((e) => e.toJson()).toList(),
       'moves': moves.map((e) => e.toJson()).toList(),
+      'isFavorite': isFavorite,
     };
   }
 }

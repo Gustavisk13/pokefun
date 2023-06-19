@@ -13,6 +13,7 @@ import 'package:pokefun/global/utils/color_by_type.dart';
 import 'package:pokefun/global/utils/quick_border.dart';
 import 'package:pokefun/global/widgets/label_app_bar.dart';
 import 'package:pokefun/global/widgets/loading_indicator.dart';
+import 'package:pokefun/modules/favorite/controller/favorite_controller.dart';
 import 'package:pokefun/modules/pokemon/controller/pokemon_controller.dart';
 import 'package:pokefun/modules/pokemon/widgets/action_card.dart';
 import 'package:pokefun/modules/pokemon/widgets/stat_indicator_widget.dart';
@@ -23,7 +24,9 @@ class PokemonPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('PokemonPage.build');
     final pokemonController = Provider.of<PokemonController>(context);
+    final favoriteController = Provider.of<FavoriteController>(context);
 
     return SafeArea(
       child: Scaffold(
@@ -33,6 +36,31 @@ class PokemonPage extends StatelessWidget {
             onBackPressed: () {
               GoRouter.of(context).go(Provider.of<AppRouter>(context, listen: false).previousPokemonRoute);
             },
+            valueActions: [
+              IconButton(
+                onPressed: () {
+                  favoriteController.toggleFavoritePokemon(pokemonController.pokemon);
+                },
+                icon: pokemonController.isLoading
+                    ? const Icon(
+                        Icons.favorite_border,
+                        color: primaryColor,
+                      )
+                    : Consumer<FavoriteController>(
+                        builder: (context, value, child) {
+                          return value.isFavorite(pokemonController.pokemon.id)
+                              ? const Icon(
+                                  Icons.favorite,
+                                  color: primaryColor,
+                                )
+                              : const Icon(
+                                  Icons.favorite_border,
+                                  color: primaryColor,
+                                );
+                        },
+                      ),
+              ),
+            ],
           ),
           backgroundColor: backgroundColor,
           body: Padding(

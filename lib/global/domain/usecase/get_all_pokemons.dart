@@ -1,19 +1,19 @@
 import 'package:pokefun/global/domain/entity/pokemon.dart';
 import 'package:pokefun/global/domain/errors/errors.dart';
-import 'package:pokefun/global/domain/repository/search_repository.dart';
+import 'package:pokefun/global/domain/repository/pokemon_repository.dart';
 
-mixin SeachAllPokemons {
+abstract class GetAllPokemons {
   Future<List<Pokemon>> call();
 }
 
-class SearchAllPokemonsImpl implements SeachAllPokemons {
-  final SearchRepository _searchRepository;
+class GetAllPokemonsImpl implements GetAllPokemons {
+  final PokemonRepository _pokemonRepository;
 
-  SearchAllPokemonsImpl(this._searchRepository);
+  GetAllPokemonsImpl(this._pokemonRepository);
 
   @override
   Future<List<Pokemon>> call() async {
-    var result = await _searchRepository.getPokemons();
+    var result = await _pokemonRepository.getPokemons();
 
     if (result.isEmpty) {
       throw PokemonNotFoundException(message: 'Pokemons not found');

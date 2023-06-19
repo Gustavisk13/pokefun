@@ -1,59 +1,51 @@
-import 'dart:developer';
+import 'dart:convert';
 
-import 'package:hive/hive.dart';
+import 'package:flutter/foundation.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pokefun/global/application/datasource/favorite_datasource.dart';
-import 'package:pokefun/global/application/models/pokemon_model.dart';
 import 'package:pokefun/global/application/models/pokemon_detail_model.dart';
+import 'package:pokefun/global/application/models/pokemon_model.dart';
 
 class HiveDatasource extends FavoriteDatasource {
   final String _boxName = 'favorite_pokemons';
 
-  Box<PokemonModel> get box => Hive.box<PokemonModel>(_boxName);
+  Box get box => Hive.box(_boxName);
 
-  HiveDatasource() {
-    _init();
-  }
-
-  Future<void> _init() async {
-    await Hive.openBox<PokemonModel>(_boxName);
-  }
+  ValueListenable<Box<dynamic>> get boxListenable => Hive.box(_boxName).listenable();
 
   @override
-  Future<void> addFavoritePokemon(PokemonModel pokemon) async {
+  void toggleFavorite(PokemonModel pokemon) {
     try {
-      await box.put(pokemon.id, pokemon);
+      if (box.containsKey(pokemon.id)) {
+        box.delete(pokemon.id);
+      } else {
+        box.put(pokemon.id, pokemon.toJson());
+      }
     } catch (e) {
       throw Exception(e);
     }
   }
 
   @override
-  Future<PokemonModel> getFavoritePokemon(int id) {
+  List<PokemonModel> getFavorites() {
     try {
-      var pokemon = box.get(id);
-      return Future.value(pokemon);
+      final List<PokemonModel> result = [];
+
+      box.keys.forEach((key) {
+        final pokemon = box.get(key);
+        result.add(PokemonModel.fromMap(pokemon));
+      });
+
+      return result;
     } catch (e) {
       throw Exception(e);
     }
   }
 
   @override
-  Future<List<PokemonModel>> getFavoritePokemons() {
-    List<PokemonModel> pokemons = [];
-
+  bool isFavorite(int id) {
     try {
-      pokemons = box.values.toList();
-      return Future.value(pokemons);
-    } catch (e) {
-      throw Exception(e);
-    }
-  }
-
-  @override
-  Future<void> removeFavoritePokemon(PokemonModel pokemon) async {
-    try {
-      //TODO: check if box is open
-      await box.delete(pokemon.id);
+      return box.containsKey(id);
     } catch (e) {
       throw Exception(e);
     }

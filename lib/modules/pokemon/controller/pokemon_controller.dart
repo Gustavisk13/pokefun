@@ -1,14 +1,26 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:pokefun/global/application/models/pokemon_detail_model.dart';
+import 'package:pokefun/global/application/repository/favorite_repository_impl.dart';
+import 'package:pokefun/global/application/repository/pokemon_repository_impl.dart';
+import 'package:pokefun/global/data/hive/hive_datasource.dart';
 import 'package:pokefun/global/data/pokeapi/pokeapi_datasource.dart';
+import 'package:pokefun/global/domain/usecase/get_pokemon_details.dart';
+import 'package:pokefun/global/domain/usecase/toggle_favorite.dart';
 
 class PokemonController extends ChangeNotifier {
   final ScrollController _scrollController = ScrollController();
-  final PokeapiDatasource _datasource = PokeapiDatasource();
   late PokemonDetailModel _pokemon;
+
+  final GetPokemonDetailsImpl _getPokemonDetails = GetPokemonDetailsImpl(PokemonRepositoryImpl(
+    pokemonDatasource: PokeapiDatasource(),
+  ));
+
+  final ToggleFavoriteImpl _toggleFavorite = ToggleFavoriteImpl(
+    FavoriteRepositoryImpl(
+      favoriteDataSource: HiveDatasource(),
+    ),
+  );
+
   bool _isLoading = false;
 
   ScrollController get scrollController => _scrollController;
@@ -23,7 +35,7 @@ class PokemonController extends ChangeNotifier {
 
   Future<void> fetchData(int id) async {
     setIsLoading(true);
-    _pokemon = await _datasource.getPokemon(id);
+    _pokemon = PokemonDetailModel.fromEntity(await _getPokemonDetails(id));
     setIsLoading(false);
 
     notifyListeners();
