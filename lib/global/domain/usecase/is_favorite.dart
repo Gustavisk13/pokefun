@@ -12,7 +12,6 @@ class IsFavoriteImpl implements IsFavorite {
   IsFavoriteImpl(this._favoriteRepository);
   @override
   bool call(int id) {
-    log('IsFavoriteImpl - call');
     final result = _favoriteRepository.isFavorite(id);
 
     return result;

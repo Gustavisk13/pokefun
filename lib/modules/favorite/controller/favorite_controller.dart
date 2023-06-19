@@ -31,6 +31,10 @@ class FavoriteController extends ChangeNotifier {
 
   List<Pokemon> get favorites => _favorites;
 
+  FavoriteController() {
+    fetchData();
+  }
+
   void fetchData() {
     List<Pokemon> result = getAllFavorites();
 
@@ -42,6 +46,7 @@ class FavoriteController extends ChangeNotifier {
 
   void toggleFavoritePokemon(Pokemon pokemon) {
     toggleFavorite(pokemon);
+    fetchData();
 
     notifyListeners();
   }

@@ -15,7 +15,6 @@ class ToggleFavoriteImpl implements ToggleFavorite {
 
   @override
   void call(Pokemon pokemon) {
-    log('ToggleFavoriteImpl - call');
     _favoriteRepository.toggleFavorite(pokemon);
   }
 }

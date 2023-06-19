@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:pokefun/global/application/models/pokemon_model.dart';
 import 'package:pokefun/global/themes/app_themes.dart';
 import 'package:pokefun/global/widgets/label_app_bar.dart';
-import 'package:pokefun/global/widgets/loading_indicator.dart';
 import 'package:pokefun/global/widgets/pokemon_card.dart';
 import 'package:pokefun/modules/favorite/controller/favorite_controller.dart';
-import 'package:pokefun/modules/pokedex/controller/pokedex_controller.dart';
 import 'package:provider/provider.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -14,8 +11,34 @@ class FavoritePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return Scaffold(
+    //     appBar: LabelAppBar(
+    //       context: context,
+    //       valueActions: [
+    //         // Padding(
+    //         //   padding: const EdgeInsets.all(8.0),
+    //         //   child: AnimatedTextField(
+    //         //     onTap: () {
+    //         //     },
+    //         //     controller: TextEditingController(),
+    //         //   ),
+    //         // ),
+
+    //         PopupMenuButton(
+    //           itemBuilder: (context) {
+    //             return [
+    //               const PopupMenuItem(
+    //                 child: Text('App version 1.0.0'),
+    //               ),
+    //             ];
+    //           },
+    //         )
+    //       ],
+    //     ),
+    //     body: Center(
+    //       child: Text('Favorite'),
+    //     ));
     final favoriteController = Provider.of<FavoriteController>(context);
-    favoriteController.fetchData();
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: LabelAppBar(
@@ -25,7 +48,6 @@ class FavoritePage extends StatelessWidget {
           //   padding: const EdgeInsets.all(8.0),
           //   child: AnimatedTextField(
           //     onTap: () {
-          //       log('onTap');
           //     },
           //     controller: TextEditingController(),
           //   ),
@@ -49,11 +71,10 @@ class FavoritePage extends StatelessWidget {
           child: AnimatedBuilder(
             animation: favoriteController,
             builder: (context, child) {
-              return Stack(
+              return Column(
                 children: [
-                  Positioned.fill(
+                  Expanded(
                     child: GridView.builder(
-                      key: const PageStorageKey('favorites'),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         childAspectRatio: 0.7,
@@ -68,7 +89,6 @@ class FavoritePage extends StatelessWidget {
                       },
                     ),
                   ),
-                  // loadingIndicator(),
                 ],
               );
             },

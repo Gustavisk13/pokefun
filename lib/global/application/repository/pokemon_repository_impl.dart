@@ -43,7 +43,6 @@ class PokemonRepositoryImpl extends PokemonRepository {
 
   @override
   Future<PokemonDetail> getPokemon(int id) async {
-    log('PokemonRepositoryImpl - getPokemon');
     late PokemonDetailModel pokemonDetail;
 
     try {

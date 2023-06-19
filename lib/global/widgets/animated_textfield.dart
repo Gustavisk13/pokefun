@@ -24,7 +24,6 @@ class _AnimatedTextFieldState extends State<AnimatedTextField> {
   @override
   void initState() {
     _focusNode.value.addListener(() {
-      log('hasFocus: ${_focusNode.value.hasFocus}');
       if (_focusNode.value.hasFocus) {
         setState(() {
           widget.width = 140;

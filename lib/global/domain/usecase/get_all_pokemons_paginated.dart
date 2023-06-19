@@ -14,7 +14,6 @@ class GetAllPokemonsPaginatedImpl implements GetAllPokemonsPaginated {
 
   @override
   Future<List<Pokemon>> call({required int offset, required int limit}) async {
-    log('GetAllPokemonsPaginatedImpl - call');
     final result = await _pokemonRepository.getPokemonsPaginated(offset: offset, limit: limit);
 
     return result;

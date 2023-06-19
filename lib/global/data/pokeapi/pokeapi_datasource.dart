@@ -68,7 +68,6 @@ class PokeapiDatasource extends PokemonDatasource {
 
   @override
   Future<PokemonDetailModel> getPokemon(int id) async {
-    log('PokeapiDatasource - getPokemon');
     late Response response;
     late PokemonDetailModel pokemonDetail;
 
@@ -76,8 +75,6 @@ class PokeapiDatasource extends PokemonDatasource {
       response = await dioClient.get('pokemon/$id');
 
       pokemonDetail = PokemonDetailModel.fromJson(response.data);
-
-      // log('PokeapiDatasource - getPokemon - pokemonDetail: ${jsonEncode(pokemonDetail)}');
 
       return Future.value(pokemonDetail);
     } catch (e) {

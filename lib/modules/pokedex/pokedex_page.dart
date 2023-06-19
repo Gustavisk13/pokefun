@@ -23,7 +23,6 @@ class PokedexPage extends StatelessWidget {
           //   padding: const EdgeInsets.all(8.0),
           //   child: AnimatedTextField(
           //     onTap: () {
-          //       log('onTap');
           //     },
           //     controller: TextEditingController(),
           //   ),

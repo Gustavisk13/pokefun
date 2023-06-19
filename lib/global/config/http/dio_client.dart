@@ -20,7 +20,6 @@ class ApiInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     options.headers['Content-Type'] = 'application/json';
-    log('Request on DioClient: ${options.uri}');
     return super.onRequest(options, handler);
   }
 
@@ -34,7 +33,6 @@ class ApiInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    log('Error on DioClient: ${err.message}');
     super.onError(err, handler);
   }
 }

@@ -14,7 +14,6 @@ class GetPokemonDetailsImpl implements GetPokemonDetails {
   GetPokemonDetailsImpl(this._pokemonRepository);
   @override
   Future<PokemonDetail> call(int id) async {
-    log('GetPokemonDetailsImpl - call');
     final result = await _pokemonRepository.getPokemon(id);
 
     return result;

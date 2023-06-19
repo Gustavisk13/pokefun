@@ -24,7 +24,6 @@ class PokemonPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('PokemonPage.build');
     final pokemonController = Provider.of<PokemonController>(context);
     final favoriteController = Provider.of<FavoriteController>(context);
 
