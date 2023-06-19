@@ -19,15 +19,6 @@ class PokedexPage extends StatelessWidget {
       appBar: LabelAppBar(
         context: context,
         valueActions: [
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: AnimatedTextField(
-          //     onTap: () {
-          //     },
-          //     controller: TextEditingController(),
-          //   ),
-          // ),
-
           PopupMenuButton(
             itemBuilder: (context) {
               return [
@@ -67,7 +58,6 @@ class PokedexPage extends StatelessWidget {
                         childAspectRatio: 0.7,
                       ),
                       controller: pokedexController.scrollController,
-                      // physics: const BouncingScrollPhysics(),
                       itemCount: pokedexController.pokemons.length,
                       itemBuilder: (context, index) {
                         final PokemonModel pokemon = pokedexController.pokemons[index];

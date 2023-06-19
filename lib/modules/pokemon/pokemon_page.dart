@@ -191,8 +191,6 @@ class PokemonPage extends StatelessWidget {
           child: Wrap(
             alignment: WrapAlignment.spaceEvenly,
             runAlignment: WrapAlignment.spaceEvenly,
-            // crossAxisAlignment: CrossAxisAlignment.baseline,
-            // textBaseline: TextBaseline.alphabetic,
             children: [
               StatIndicatorWidget(stat: 'hp', value: pokemon.hp),
               StatIndicatorWidget(stat: 'speed', value: pokemon.speed),
@@ -207,9 +205,6 @@ class PokemonPage extends StatelessWidget {
           child: Wrap(
             alignment: WrapAlignment.spaceEvenly,
             runAlignment: WrapAlignment.spaceEvenly,
-
-            // crossAxisAlignment: CrossAxisAlignment.baseline,
-            // textBaseline: TextBaseline.alphabetic,
             children: [
               StatIndicatorWidget(stat: 'attack', value: pokemon.attack),
               StatIndicatorWidget(stat: 'defense', value: pokemon.defense),

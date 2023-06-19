@@ -65,11 +65,10 @@ class _FloatingNavbarState extends State<Navbar> {
                 borderRadius: BorderRadius.circular(widget.borderRadius!),
                 color: widget.backgroundColor,
               ),
-              // width: widget.width,
               height: widget.height,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                separatorBuilder: (context, index) => const SizedBox(width: 10), // Espaçamento horizontal entre os itens
+                separatorBuilder: (context, index) => const SizedBox(width: 10),
                 itemCount: items.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
